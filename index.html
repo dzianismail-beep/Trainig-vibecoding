@@ -4,23 +4,33 @@
     <meta charset="UTF-8">
     <title>Tetris Game</title>
     <style>
-        body { background: #222; color: #fff; font-family: Arial, sans-serif; text-align: center; }
-        canvas { background: #111; display: block; margin: 20px auto; border: 2px solid #444; }
+        body { background: #222; color: #fff; font-family: Arial, sans-serif; text-align: center; margin: 0; padding: 10px; }
+        canvas { background: #111; display: block; margin: 20px auto; border: 2px solid #444; max-width: 100%; height: auto; }
         #score { font-size: 1.2em; margin-top: 10px; }
         #game-over { color: #f00; font-size: 2em; margin-top: 20px; display: none; }
+        @media (max-width: 480px) {
+            h1 { font-size: 1.5em; margin: 10px 0; }
+            canvas { margin: 10px auto; }
+            #score { font-size: 1.1em; }
+            #game-over { font-size: 1.5em; }
+        }
     </style>
 </head>
 <body>
     <h1>Tetris Game</h1>
+    <button id="restart" style="padding: 15px 30px; font-size: 1.1em; border-radius: 10px; border: none; background: #28a745; color: #fff; cursor: pointer; transition: background 0.2s; font-weight: bold; margin-bottom: 20px;">🔁 Restart Game</button>
     <canvas id="tetris" width="300" height="600"></canvas>
     <div id="score">Score: 0</div>
     <div id="game-over">Game Over</div>
-    <div id="controls" style="margin: 20px 0;">
-        <button id="moveLeft" style="margin: 0 5px; padding: 10px 20px; font-size: 1em; border-radius: 8px; border: none; background: #444; color: #fff; cursor: pointer; transition: background 0.2s;">⬅️ Left</button>
-        <button id="rotate" style="margin: 0 5px; padding: 10px 20px; font-size: 1em; border-radius: 8px; border: none; background: #444; color: #fff; cursor: pointer; transition: background 0.2s;">🔄 Rotate</button>
-        <button id="moveRight" style="margin: 0 5px; padding: 10px 20px; font-size: 1em; border-radius: 8px; border: none; background: #444; color: #fff; cursor: pointer; transition: background 0.2s;">➡️ Right</button>
-        <button id="moveDown" style="margin: 0 5px; padding: 10px 20px; font-size: 1em; border-radius: 8px; border: none; background: #444; color: #fff; cursor: pointer; transition: background 0.2s;">⬇️ Down</button>
-        <button id="restart" style="margin: 0 5px; padding: 10px 30px; font-size: 1em; border-radius: 8px; border: none; background: #28a745; color: #fff; cursor: pointer; transition: background 0.2s; font-weight: bold;">🔁 Restart Game</button>
+    <div id="controls" style="margin: 20px 0; display: flex; flex-direction: column; align-items: center; gap: 10px; max-width: 300px; margin: 20px auto;">
+        <div style="display: flex; gap: 10px; width: 100%;">
+            <button id="moveLeft" style="flex: 1; padding: 15px 10px; font-size: 1.1em; border-radius: 10px; border: none; background: #444; color: #fff; cursor: pointer; transition: background 0.2s; min-height: 50px;">⬅️ Left</button>
+            <button id="rotate" style="flex: 1; padding: 15px 10px; font-size: 1.1em; border-radius: 10px; border: none; background: #444; color: #fff; cursor: pointer; transition: background 0.2s; min-height: 50px;">🔄 Rotate</button>
+            <button id="moveRight" style="flex: 1; padding: 15px 10px; font-size: 1.1em; border-radius: 10px; border: none; background: #444; color: #fff; cursor: pointer; transition: background 0.2s; min-height: 50px;">➡️ Right</button>
+        </div>
+        <div style="display: flex; gap: 10px; width: 100%;">
+            <button id="moveDown" style="flex: 1; padding: 15px 10px; font-size: 1.1em; border-radius: 10px; border: none; background: #444; color: #fff; cursor: pointer; transition: background 0.2s; min-height: 50px;">⬇️ Down</button>
+        </div>
     </div>
     <script>
 const canvas = document.getElementById('tetris');
