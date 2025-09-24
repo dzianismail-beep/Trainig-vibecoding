@@ -15,6 +15,13 @@
     <canvas id="tetris" width="300" height="600"></canvas>
     <div id="score">Score: 0</div>
     <div id="game-over">Game Over</div>
+    <div id="controls" style="margin: 20px 0;">
+        <button id="moveLeft" style="margin: 0 5px; padding: 10px 20px; font-size: 1em; border-radius: 8px; border: none; background: #444; color: #fff; cursor: pointer; transition: background 0.2s;">⬅️ Left</button>
+        <button id="rotate" style="margin: 0 5px; padding: 10px 20px; font-size: 1em; border-radius: 8px; border: none; background: #444; color: #fff; cursor: pointer; transition: background 0.2s;">🔄 Rotate</button>
+        <button id="moveRight" style="margin: 0 5px; padding: 10px 20px; font-size: 1em; border-radius: 8px; border: none; background: #444; color: #fff; cursor: pointer; transition: background 0.2s;">➡️ Right</button>
+        <button id="moveDown" style="margin: 0 5px; padding: 10px 20px; font-size: 1em; border-radius: 8px; border: none; background: #444; color: #fff; cursor: pointer; transition: background 0.2s;">⬇️ Down</button>
+        <button id="restart" style="margin: 0 5px; padding: 10px 30px; font-size: 1em; border-radius: 8px; border: none; background: #28a745; color: #fff; cursor: pointer; transition: background 0.2s; font-weight: bold;">🔁 Restart Game</button>
+    </div>
     <script>
 const canvas = document.getElementById('tetris');
 const ctx = canvas.getContext('2d');
@@ -150,6 +157,30 @@ function gameLoop() {
 }
 draw();
 gameLoop();
+
+// Button controls
+document.getElementById('moveLeft').onclick = function() {
+    if (!gameOver) move(-1);
+};
+document.getElementById('moveRight').onclick = function() {
+    if (!gameOver) move(1);
+};
+document.getElementById('moveDown').onclick = function() {
+    if (!gameOver) tick();
+};
+document.getElementById('rotate').onclick = function() {
+    if (!gameOver) rotatePiece();
+};
+document.getElementById('restart').onclick = function() {
+    // Reset game state
+    board = Array.from({ length: ROWS }, () => Array(COLS).fill(0));
+    piece = randomPiece();
+    score = 0;
+    gameOver = false;
+    document.getElementById('score').textContent = 'Score: 0';
+    document.getElementById('game-over').style.display = 'none';
+    draw();
+};
     </script>
 </body>
 </html>
